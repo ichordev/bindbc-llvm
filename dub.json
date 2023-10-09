@@ -1,0 +1,37 @@
+{
+	"name": "bindbc-llvm",
+	"description": "Static & dynamic bindings to LLVM, compatible with BetterC, @nogc, and nothrow.",
+	"authors": ["Aya Partridge"],
+	"license": "BSL-1.0",
+	
+	"dependencies": {"bindbc-common": "~>0.1.1"},
+	"targetType": "staticLibrary",
+	"targetPath": "lib",
+	"targetName": "BindBC_llvm",
+	
+	"configurations": [
+		{
+			"name": "dynamic",
+			"dependencies": {"bindbc-loader": "~>1.1.0"}
+		},
+		{
+			"name": "dynamicBC",
+			"dependencies": {"bindbc-loader": "~>1.1.0"},
+			"subConfigurations": {
+				"bindbc-common": "yesBC",
+				"bindbc-loader": "yesBC",
+			},
+			"buildOptions": ["betterC"],
+		},
+		{
+			"name": "static",
+			"versions": ["BindLLVM_Static"],
+		},
+		{
+			"name": "staticBC",
+			"subConfigurations": {"bindbc-common": "yesBC"},
+			"buildOptions": ["betterC"],
+			"versions": ["BindLLVM_Static"],
+		}
+	]
+}
