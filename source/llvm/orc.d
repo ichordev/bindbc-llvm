@@ -129,8 +129,8 @@ alias LLVMOrcMaterialisationUnitRef = LLVMOrcMaterializationUnitRef;
 
 struct LLVMOrcOpaqueMaterializationResponsibility;
 alias LLVMOrcOpaqueMaterialisationResponsibility = LLVMOrcOpaqueMaterializationResponsibility;
-alias LVMOrcMaterializationResponsibilityRef = LLVMOrcOpaqueMaterializationResponsibility*;
-alias LVMOrcMaterialisationResponsibilityRef = LVMOrcMaterializationResponsibilityRef;
+alias LLVMOrcMaterializationResponsibilityRef = LLVMOrcOpaqueMaterializationResponsibility*;
+alias LLVMOrcMaterialisationResponsibilityRef = LLVMOrcMaterializationResponsibilityRef;
 
 extern(C) nothrow{
 	alias LLVMOrcMaterializationUnitMaterializeFunction = void function(void* ctx, LLVMOrcMaterializationResponsibilityRef mr);
@@ -147,7 +147,7 @@ struct LLVMOrcOpaqueResourceTracker;
 alias LLVMOrcResourceTrackerRef = LLVMOrcOpaqueResourceTracker*;
 
 struct LLVMOrcOpaqueDefinitionGenerator;
-alias LVMOrcDefinitionGeneratorRef = LLVMOrcOpaqueDefinitionGenerator*;
+alias LLVMOrcDefinitionGeneratorRef = LLVMOrcOpaqueDefinitionGenerator*;
 
 struct LLVMOrcOpaqueLookupState;
 alias LLVMOrcLookupStateRef = LLVMOrcOpaqueLookupState*;
@@ -167,7 +167,7 @@ alias LLVMOrcThreadSafeModuleRef = LLVMOrcOpaqueThreadSafeModule*;
 alias LLVMOrcGenericIRModuleOperationFunction = extern(C) LLVMErrorRef function(void* ctx, LLVMModuleRef m) nothrow;
 
 struct LLVMOrcOpaqueJITTargetMachineBuilder;
-alias LVMOrcJITTargetMachineBuilderRef = LLVMOrcOpaqueJITTargetMachineBuilder*;
+alias LLVMOrcJITTargetMachineBuilderRef = LLVMOrcOpaqueJITTargetMachineBuilder*;
 
 struct LLVMOrcOpaqueObjectLayer;
 alias LLVMOrcObjectLayerRef = LLVMOrcOpaqueObjectLayer*;
@@ -178,13 +178,18 @@ alias LLVMOrcObjectLinkingLayerRef = LLVMOrcOpaqueObjectLinkingLayer*;
 struct LLVMOrcOpaqueIRTransformLayer;
 alias LLVMOrcIRTransformLayerRef = LLVMOrcOpaqueIRTransformLayer*;
 
+alias LLVMOrcIRTransformLayerTransformFunction = extern(C) LLVMErrorRef function(void* ctx, LLVMOrcThreadSafeModuleRef* modInOut, LLVMOrcMaterializationResponsibilityRef mr) nothrow;
+
+struct LLVMOrcOpaqueObjectTransformLayer;
+alias LLVMOrcObjectTransformLayerRef = LLVMOrcOpaqueObjectTransformLayer*;
+
 alias LLVMOrcObjectTransformLayerTransformFunction = extern(C) LLVMErrorRef function(void* ctx, LLVMMemoryBufferRef* objInOut) nothrow;
 
 struct LLVMOrcOpaqueIndirectStubsManager;
-alias LVMOrcIndirectStubsManagerRef = LLVMOrcOpaqueIndirectStubsManager*;
+alias LLVMOrcIndirectStubsManagerRef = LLVMOrcOpaqueIndirectStubsManager*;
 
 struct LLVMOrcOpaqueLazyCallThroughManager;
-alias LVMOrcLazyCallThroughManagerRef = LLVMOrcOpaqueLazyCallThroughManager*;
+alias LLVMOrcLazyCallThroughManagerRef = LLVMOrcOpaqueLazyCallThroughManager*;
 
 struct LLVMOrcOpaqueDumpObjects;
 alias LLVMOrcDumpObjectsRef = LLVMOrcOpaqueDumpObjects*;
@@ -206,9 +211,9 @@ mixin(joinFnBinds((){
 		{q{LLVMErrorRef}, q{LLVMOrcResourceTrackerRemove}, q{LLVMOrcResourceTrackerRef rt}},
 		{q{void}, q{LLVMOrcDisposeDefinitionGenerator}, q{LLVMOrcDefinitionGeneratorRef dg}},
 		{q{void}, q{LLVMOrcDisposeMaterializationUnit}, q{LLVMOrcMaterializationUnitRef mu}, aliases: [q{LLVMOrcDisposeMaterialisationUnit}]},
-		{q{LLVMOrcMaterializationUnitRef}, q{LLVMOrcCreateCustomMaterializationUnit}, q{const(char)* name, void* ctx, LLVMOrcCSymbolFlagsMapPairs syms, size_t numSyms, LLVMOrcSymbolStringPoolEntryRef initSym, LLVMOrcMaterializationUnitMaterializeFunction materialize, LLVMOrcMaterializationUnitDiscardFunction discard, LLVMOrcMaterializationUnitDestroyFunction destroy}, aliases: [q{LLVMOrcMaterialisationUnitRef}]},
-		{q{LLVMOrcMaterializationUnitRef}, q{LLVMOrcAbsoluteSymbols}, q{LLVMOrcCSymbolMapPairs syms, size_t numPairs}, aliases: [q{LLVMOrcMaterialisationUnitRef}]},
-		{q{LLVMOrcMaterializationUnitRef}, q{LLVMOrcLazyReexports}, q{LLVMOrcLazyCallThroughManagerRef lctm, LLVMOrcIndirectStubsManagerRef ism, LLVMOrcJITDylibRef sourceRef, LLVMOrcCSymbolAliasMapPairs callableAliases, size_t numPairs}, aliases: [q{LLVMOrcMaterialisationUnitRef}]},
+		{q{LLVMOrcMaterializationUnitRef}, q{LLVMOrcCreateCustomMaterializationUnit}, q{const(char)* name, void* ctx, LLVMOrcCSymbolFlagsMapPairs syms, size_t numSyms, LLVMOrcSymbolStringPoolEntryRef initSym, LLVMOrcMaterializationUnitMaterializeFunction materialize, LLVMOrcMaterializationUnitDiscardFunction discard, LLVMOrcMaterializationUnitDestroyFunction destroy}, aliases: [q{LLVMOrcCreateCustomMaterialisationUnit}]},
+		{q{LLVMOrcMaterializationUnitRef}, q{LLVMOrcAbsoluteSymbols}, q{LLVMOrcCSymbolMapPairs syms, size_t numPairs}},
+		{q{LLVMOrcMaterializationUnitRef}, q{LLVMOrcLazyReexports}, q{LLVMOrcLazyCallThroughManagerRef lctm, LLVMOrcIndirectStubsManagerRef ism, LLVMOrcJITDylibRef sourceRef, LLVMOrcCSymbolAliasMapPairs callableAliases, size_t numPairs}},
 		{q{void}, q{LLVMOrcDisposeMaterializationResponsibility}, q{LLVMOrcMaterializationResponsibilityRef mr}, aliases: [q{LLVMOrcDisposeMaterialisationResponsibility}]},
 		{q{LLVMOrcJITDylibRef}, q{LLVMOrcMaterializationResponsibilityGetTargetDylib}, q{LLVMOrcMaterializationResponsibilityRef mr}, aliases: [q{LLVMOrcMaterialisationResponsibilityGetTargetDylib}]},
 		{q{LLVMOrcExecutionSessionRef}, q{LLVMOrcMaterializationResponsibilityGetExecutionSession}, q{LLVMOrcMaterializationResponsibilityRef mr}, aliases: [q{LLVMOrcMaterialisationResponsibilityGetExecutionSession}]},

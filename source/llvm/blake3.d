@@ -40,8 +40,8 @@ mixin(joinFnBinds((){
 		{q{void}, q{llvm_blake3_hasher_init_derive_key}, q{llvm_blake3_hasher* self, const(char)* context}},
 		{q{void}, q{llvm_blake3_hasher_init_derive_key_raw}, q{llvm_blake3_hasher* self, const(void)* context, size_t context_len}},
 		{q{void}, q{llvm_blake3_hasher_update}, q{llvm_blake3_hasher* self, const(void)* input, size_t input_len}},
-		{q{void}, q{llvm_blake3_hasher_finalize}, q{const(llvm_blake3_hasher)* self, ubyte* out, size_t out_len}},
-		{q{void}, q{llvm_blake3_hasher_finalize_seek}, q{const(llvm_blake3_hasher)* self, ulong seek, ubyte* out, size_t out_len}},
+		{q{void}, q{llvm_blake3_hasher_finalize}, q{const(llvm_blake3_hasher)* self, ubyte* out_, size_t out_len}},
+		{q{void}, q{llvm_blake3_hasher_finalize_seek}, q{const(llvm_blake3_hasher)* self, ulong seek, ubyte* out_, size_t out_len}},
 		{q{void}, q{llvm_blake3_hasher_reset}, q{llvm_blake3_hasher* self}},
 	];
 	return ret;

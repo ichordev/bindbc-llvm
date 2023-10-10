@@ -81,7 +81,7 @@ struct LTOObjectBuffer{
 
 mixin(joinFnBinds((){
 	FnBind[] ret;
-	static if(LTO_API_VERSION >= 3){
+	if(LTO_API_VERSION >= 3){
 		FnBind[] add = [
 			{q{const(char)*}, q{lto_get_version}, q{}},
 			{q{const(char)*}, q{lto_get_error_message}, q{}},
@@ -108,7 +108,7 @@ mixin(joinFnBinds((){
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 4){
+	if(LTO_API_VERSION >= 4){
 		FnBind[] add = [
 			{q{void}, q{lto_module_set_target_triple}, q{lto_module_t mod, const(char)* triple}},
 			{q{void}, q{lto_codegen_set_cpu}, q{lto_code_gen_t cg, const(char)* cpu}},
@@ -116,29 +116,29 @@ mixin(joinFnBinds((){
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 5){
+	if(LTO_API_VERSION >= 5){
 		FnBind[] add = [
 			{q{lto_module_t}, q{lto_module_create_from_fd}, q{int fd, const(char)* path, size_t file_size}},
-			{q{lto_module_t}, q{lto_module_create_from_fd_at_offset}, q{int fd, const(char)* path, size_t file_size, size_t map_size, off_t offset}},
+			{q{lto_module_t}, q{lto_module_create_from_fd_at_offset}, q{int fd, const(char)* path, size_t file_size, size_t map_size, ptrdiff_t offset}},
 			{q{bool}, q{lto_codegen_write_merged_modules}, q{lto_code_gen_t cg, const(char)* path}},
 			{q{bool}, q{lto_codegen_compile_to_file}, q{lto_code_gen_t cg, const(char)** name}},
 			{q{void}, q{lto_initialize_disassembler}, q{}, aliases: [q{lto_initialise_disassembler}]},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 7){
+	if(LTO_API_VERSION >= 7){
 		FnBind[] add = [
 			{q{void}, q{lto_codegen_set_diagnostic_handler}, q{lto_code_gen_t, lto_diagnostic_handler_t, void*}},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 9){
+	if(LTO_API_VERSION >= 9){
 		FnBind[] add = [
 			{q{lto_module_t}, q{lto_module_create_from_memory_with_path}, q{const(void)* mem, size_t length, const(char)* path}},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 11){
+	if(LTO_API_VERSION >= 11){
 		FnBind[] add = [
 			{q{lto_module_t}, q{lto_module_create_in_local_context}, q{const(void)* mem, size_t length, const(char)* path}},
 			{q{lto_module_t}, q{lto_module_create_in_codegen_context}, q{const(void)* mem, size_t length, const(char)* path, lto_code_gen_t cg}},
@@ -146,7 +146,7 @@ mixin(joinFnBinds((){
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 12){
+	if(LTO_API_VERSION >= 12){
 		FnBind[] add = [
 			{q{bool}, q{lto_codegen_optimize}, q{lto_code_gen_t cg}, aliases: [q{lto_codegen_optimise}]},
 			{q{const(void)*}, q{lto_codegen_compile_optimized}, q{lto_code_gen_t cg, size_t* length}, aliases: [q{lto_codegen_compile_optimised}]},
@@ -154,31 +154,31 @@ mixin(joinFnBinds((){
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 13){
+	if(LTO_API_VERSION >= 13){
 		FnBind[] add = [
 			{q{void}, q{lto_codegen_set_module}, q{lto_code_gen_t cg, lto_module_t mod}},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 14){
+	if(LTO_API_VERSION >= 14){
 		FnBind[] add = [
 			{q{void}, q{lto_codegen_set_should_internalize}, q{lto_code_gen_t cg, bool shouldInternalise}, aliases: [q{lto_codegen_set_should_internalise}]},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 15){
+	if(LTO_API_VERSION >= 15){
 		FnBind[] add = [
 			{q{void}, q{lto_codegen_set_should_embed_uselists}, q{lto_code_gen_t cg, bool shouldEmbedUselists}},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 16){
+	if(LTO_API_VERSION >= 16){
 		FnBind[] add = [
 			{q{const(char)*}, q{lto_module_get_linkeropts}, q{lto_module_t mod}},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 18){
+	if(LTO_API_VERSION >= 18){
 		FnBind[] add = [
 			{q{thinlto_code_gen_t}, q{thinlto_create_codegen}, q{}},
 			{q{void}, q{thinlto_codegen_dispose}, q{thinlto_code_gen_t cg}},
@@ -200,20 +200,20 @@ mixin(joinFnBinds((){
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 19){
+	if(LTO_API_VERSION >= 19){
 		FnBind[] add = [
 			{q{void}, q{thinlto_codegen_disable_codegen}, q{thinlto_code_gen_t cg, bool disable}},
 			{q{void}, q{thinlto_codegen_set_codegen_only}, q{thinlto_code_gen_t cg, bool codegen_only}},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 20){
+	if(LTO_API_VERSION >= 20){
 		FnBind[] add = [
 			{q{bool}, q{lto_module_has_objc_category}, q{const(void)* mem, size_t length}},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 21){
+	if(LTO_API_VERSION >= 21){
 		FnBind[] add = [
 			{q{uint}, q{thinlto_module_get_num_object_files}, q{thinlto_code_gen_t cg}},
 			{q{const(char)*}, q{thinlto_module_get_object_file}, q{thinlto_code_gen_t cg, uint index}},
@@ -221,20 +221,20 @@ mixin(joinFnBinds((){
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 22){
+	if(LTO_API_VERSION >= 22){
 		FnBind[] add = [
 			{q{void}, q{thinlto_codegen_set_cache_size_bytes}, q{thinlto_code_gen_t cg, uint max_size_bytes}},
 			{q{void}, q{thinlto_codegen_set_cache_size_files}, q{thinlto_code_gen_t cg, uint max_size_files}},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 23){
+	if(LTO_API_VERSION >= 23){
 		FnBind[] add = [
 			{q{void}, q{thinlto_codegen_set_cache_size_megabytes}, q{thinlto_code_gen_t cg, uint max_size_megabytes}},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 24){
+	if(LTO_API_VERSION >= 24){
 		FnBind[] add = [
 			{q{lto_input_t}, q{lto_input_create}, q{const(void)* buffer, size_t buffer_size, const(char)* path}},
 			{q{void}, q{lto_input_dispose}, q{lto_input_t input}},
@@ -243,31 +243,31 @@ mixin(joinFnBinds((){
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 25){
+	if(LTO_API_VERSION >= 25){
 		FnBind[] add = [
 			{q{const(char*)*}, q{lto_runtime_lib_symbols_list}, q{size_t* size}},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 26){
+	if(LTO_API_VERSION >= 26){
 		FnBind[] add = [
 			{q{void}, q{lto_codegen_debug_options_array}, q{lto_code_gen_t cg, const(char*)*, int number}},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 27){
+	if(LTO_API_VERSION >= 27){
 		FnBind[] add = [
 			{q{bool}, q{lto_module_get_macho_cputype}, q{lto_module_t mod, uint* out_cputype, uint* out_cpusubtype}},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 28){
+	if(LTO_API_VERSION >= 28){
 		FnBind[] add = [
 			{q{void}, q{lto_set_debug_options}, q{const(char*)* options, int number}},
 		];
 		ret ~= add;
 	}
-	static if(LTO_API_VERSION >= 29){
+	if(LTO_API_VERSION >= 29){
 		FnBind[] add = [
 			{q{bool}, q{lto_module_has_ctor_dtor}, q{lto_module_t mod}},
 		];

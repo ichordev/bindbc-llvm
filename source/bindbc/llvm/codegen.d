@@ -9,4 +9,4 @@ module bindbc.llvm.codegen;
 import bindbc.llvm.config;
 import bindbc.common.codegen;
 
-mixin(makeFnBindFns(staticBinding));
+mixin(makeFnBindFns(staticBinding, Version(0,1,1)));

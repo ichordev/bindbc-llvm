@@ -20,7 +20,7 @@ mixin(joinFnBinds((){
 	FnBind[] ret = [
 		{q{LLVMErrorTypeId}, q{LLVMGetErrorTypeId}, q{LLVMErrorRef Err}},
 		{q{void}, q{LLVMConsumeError}, q{LLVMErrorRef Err}},
-		{q{char},*q{ LLVMGetErrorMessage}, q{LLVMErrorRef Err}},
+		{q{char*}, q{LLVMGetErrorMessage}, q{LLVMErrorRef Err}},
 		{q{void}, q{LLVMDisposeErrorMessage}, q{char* ErrMsg}},
 		{q{LLVMErrorTypeId}, q{LLVMGetStringErrorTypeId}, q{}},
 		{q{LLVMErrorRef}, q{LLVMCreateStringError}, q{const(char)* ErrMsg}},

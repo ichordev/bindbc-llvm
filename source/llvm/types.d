@@ -9,7 +9,7 @@ module llvm.types;
 alias LLVMBool = int;
 
 struct LLVMOpaqueMemoryBuffer;
-alias LLVMMemoryBufferRef = LLVMOpaqueMemoryBuffer;
+alias LLVMMemoryBufferRef = LLVMOpaqueMemoryBuffer*;
 
 struct LLVMOpaqueContext;
 alias LLVMContextRef = LLVMOpaqueContext*;

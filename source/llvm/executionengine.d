@@ -31,8 +31,8 @@ struct LLVMMCJITCompilerOptions{
 }
 
 extern(C) nothrow{
-	alias LLVMMemoryManagerAllocateCodeSectionCallback = ubyte* function(void* opaque, uintptr_t size, uint alignment, uint sectionID, const(char)* sectionName);
-	alias LLVMMemoryManagerAllocateDataSectionCallback = ubyte* function(void* opaque, uintptr_t size, uint alignment, uint sectionID, const(char)* sectionName, LLVMBool isReadOnly);
+	alias LLVMMemoryManagerAllocateCodeSectionCallback = ubyte* function(void* opaque, size_t size, uint alignment, uint sectionID, const(char)* sectionName);
+	alias LLVMMemoryManagerAllocateDataSectionCallback = ubyte* function(void* opaque, size_t size, uint alignment, uint sectionID, const(char)* sectionName, LLVMBool isReadOnly);
 	alias LLVMMemoryManagerFinalizeMemoryCallback = LLVMBool function(void* opaque, char** errMsg);
 	alias LLVMMemoryManagerFinaliseMemoryCallback = LLVMMemoryManagerFinalizeMemoryCallback;
 	alias LLVMMemoryManagerDestroyCallback = void function(void* opaque);

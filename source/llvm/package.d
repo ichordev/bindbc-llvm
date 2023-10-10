@@ -16,7 +16,6 @@ public import
 	llvm.blake3,
 	llvm.comdat,
 	llvm.core,
-	llvm.datatypes,
 	llvm.debuginfo,
 	llvm.disassembler,
 	llvm.disassemblertypes,
@@ -40,9 +39,7 @@ public import
 static if(!staticBinding):
 import bindbc.loader;
 
-mixin(makeDynloadFns("LLVM", makeLibPaths(["LLVM"], [
-	]), [
-		__MODULE__,
+mixin(makeDynloadFns("LLVM", makeLibPaths(["LLVM"], null), [
 		"llvm.analysis",
 		"llvm.bitreader",
 		"llvm.bitwriter",
