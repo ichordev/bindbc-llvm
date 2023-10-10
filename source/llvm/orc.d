@@ -41,7 +41,7 @@ struct LLVMJITEvaluatedSymbol{
 struct LLVMOrcOpaqueExecutionSession;
 alias LLVMOrcExecutionSessionRef = LLVMOrcOpaqueExecutionSession*;
 
-alias LLVMOrcErrorReporterFunction = void function(void* ctx, LLVMErrorRef err);
+alias LLVMOrcErrorReporterFunction = extern(C) void function(void* ctx, LLVMErrorRef err) nothrow;
 
 struct LLVMOrcOpaqueSymbolStringPool;
 alias LLVMOrcSymbolStringPoolRef = LLVMOrcOpaqueSymbolStringPool*;
@@ -132,14 +132,16 @@ alias LLVMOrcOpaqueMaterialisationResponsibility = LLVMOrcOpaqueMaterializationR
 alias LVMOrcMaterializationResponsibilityRef = LLVMOrcOpaqueMaterializationResponsibility*;
 alias LVMOrcMaterialisationResponsibilityRef = LVMOrcMaterializationResponsibilityRef;
 
-alias LLVMOrcMaterializationUnitMaterializeFunction = extern(C) void function(void* ctx, LLVMOrcMaterializationResponsibilityRef mr) nothrow;
-alias LLVMOrcMaterialisationUnitMaterializeFunction = LLVMOrcMaterializationUnitMaterializeFunction;
-
-alias LLVMOrcMaterializationUnitDiscardFunction = extern(C) void function(void* ctx, LLVMOrcJITDylibRef jd, LLVMOrcSymbolStringPoolEntryRef symbol) nothrow;
-alias LLVMOrcMaterialisationUnitDiscardFunction = LLVMOrcMaterializationUnitDiscardFunction;
-
-alias LLVMOrcMaterializationUnitDestroyFunction = extern(C) void function(void* ctx) nothrow;
-alias LLVMOrcMaterialisationUnitDestroyFunction = LLVMOrcMaterializationUnitDestroyFunction;
+extern(C) nothrow{
+	alias LLVMOrcMaterializationUnitMaterializeFunction = void function(void* ctx, LLVMOrcMaterializationResponsibilityRef mr);
+	alias LLVMOrcMaterialisationUnitMaterializeFunction = LLVMOrcMaterializationUnitMaterializeFunction;
+	
+	alias LLVMOrcMaterializationUnitDiscardFunction = void function(void* ctx, LLVMOrcJITDylibRef jd, LLVMOrcSymbolStringPoolEntryRef symbol);
+	alias LLVMOrcMaterialisationUnitDiscardFunction = LLVMOrcMaterializationUnitDiscardFunction;
+	
+	alias LLVMOrcMaterializationUnitDestroyFunction = void function(void* ctx);
+	alias LLVMOrcMaterialisationUnitDestroyFunction = LLVMOrcMaterializationUnitDestroyFunction;
+}
 
 struct LLVMOrcOpaqueResourceTracker;
 alias LLVMOrcResourceTrackerRef = LLVMOrcOpaqueResourceTracker*;
@@ -150,11 +152,11 @@ alias LVMOrcDefinitionGeneratorRef = LLVMOrcOpaqueDefinitionGenerator*;
 struct LLVMOrcOpaqueLookupState;
 alias LLVMOrcLookupStateRef = LLVMOrcOpaqueLookupState*;
 
-alias LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction = extern(C) LLVMErrorRef function(LLVMOrcDefinitionGeneratorRef generatorObj, void* ctx, LLVMOrcLookupStateRef* lookupState, LLVMOrcLookupKind kind, LLVMOrcJITDylibRef jd, LLVMOrcJITDylibLookupFlags jdLookupFlags, LLVMOrcCLookupSet lookupSet, size_t lookupSetSize) nothrow;
-
-alias LLVMOrcDisposeCAPIDefinitionGeneratorFunction = extern(C) void function(void* ctx) nothrow;
-
-alias LLVMOrcSymbolPredicate = extern(C) int function(void* Ctx, LLVMOrcSymbolStringPoolEntryRef sym) nothrow;
+extern(C) nothrow{
+	alias LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction = LLVMErrorRef function(LLVMOrcDefinitionGeneratorRef generatorObj, void* ctx, LLVMOrcLookupStateRef* lookupState, LLVMOrcLookupKind kind, LLVMOrcJITDylibRef jd, LLVMOrcJITDylibLookupFlags jdLookupFlags, LLVMOrcCLookupSet lookupSet, size_t lookupSetSize);
+	alias LLVMOrcDisposeCAPIDefinitionGeneratorFunction = void function(void* ctx);
+	alias LLVMOrcSymbolPredicate = int function(void* Ctx, LLVMOrcSymbolStringPoolEntryRef sym);
+}
 
 struct LLVMOrcOpaqueThreadSafeContext;
 alias LLVMOrcThreadSafeContextRef = LLVMOrcOpaqueThreadSafeContext*;

@@ -37,7 +37,7 @@ enum{
 	LLVMDisassembler_VariantKind_ARM64_TLVOFF      = 6,
 }
 
-alias LLVMSymbolLookupCallback = const(char)* function(void* disInfo, ulong referenceValue, ulong* referenceType, ulong referencePC, const(char)** referenceName);
+alias LLVMSymbolLookupCallback = extern(C) const(char)* function(void* disInfo, ulong referenceValue, ulong* referenceType, ulong referencePC, const(char)** referenceName) nothrow;
 
 enum{
 	LLVMDisassembler_ReferenceType_InOut_None             = 0,

@@ -349,8 +349,10 @@ enum: LLVMAttributeIndex{
 	LLVMAttributeFunctionIndex = -1,
 }
 
-alias LLVMDiagnosticHandler = extern(C) void function(LLVMDiagnosticInfoRef, void*) nothrow;
-alias LLVMYieldCallback = extern(C) void function(LLVMContextRef, void*) nothrow;
+extern(C) nothrow{
+	alias LLVMDiagnosticHandler = void function(LLVMDiagnosticInfoRef, void*);
+	alias LLVMYieldCallback = void function(LLVMContextRef, void*);
+}
 
 mixin(joinFnBinds((){
 	FnBind[] ret = [

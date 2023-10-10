@@ -4,18 +4,22 @@
 +     (See accompanying file LICENSE_1_0.txt or copy at
 +           http://www.boost.org/LICENSE_1_0.txt)
 +/
-module llvm.errorhandling;
+module llvm.linker;
 
 import bindbc.llvm.config;
 import bindbc.llvm.codegen;
 
-alias LLVMFatalErrorHandler = extern(C) void function(const(char)* reason) nothrow;
+import llvm.types;
+
+alias LLVMLinkerMode = int;
+enum: LLVMLinkerMode{
+	LLVMLinkerDestroySource = 0,
+	LLVMLinkerPreserveSource_Removed = 1,
+}
 
 mixin(joinFnBinds((){
 	FnBind[] ret = [
-		{q{void}, q{LLVMInstallFatalErrorHandler}, q{LLVMFatalErrorHandler handler}},
-		{q{void}, q{LLVMResetFatalErrorHandler}, q{}},
-		{q{void}, q{LLVMEnablePrettyStackTrace}, q{}},
+		{q{LLVMBool}, q{LLVMLinkModules2}, q{LLVMModuleRef dest, LLVMModuleRef src}},
 	];
 	return ret;
 }()));
