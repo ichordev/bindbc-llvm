@@ -105,7 +105,7 @@ mixin(joinFnBinds((){
 	];
 	static foreach(target; targets){{
 		mixin(
-		`version(LLVM_Target_`~target~`){
+		`static if(nativeTarget == "`~target~`" || { version(LLVM_Target_`~target~`) return true; else return false; }()){
 			FnBind[] add = [
 				{q{void}, q{LLVMInitialize`~target~`TargetInfo}, q{}, aliases: [q{LLVMInitialise`~target~`TargetInfo}]},
 				{q{void}, q{LLVMInitialize`~target~`Target}, q{}, aliases: [q{LLVMInitialise`~target~`Target}]},
@@ -116,7 +116,7 @@ mixin(joinFnBinds((){
 	}}
 	static foreach(target; asmPrinters){{
 		mixin(
-		`version(LLVM_Target_`~target~`){
+		`static if(nativeTarget == "`~target~`" || { version(LLVM_Target_`~target~`) return true; else return false; }()){
 			FnBind[] add = [
 				{q{void}, q{LLVMInitialize`~target~`AsmPrinter}, q{}, aliases: [q{LLVMInitialise`~target~`AsmPrinter}]},
 				{q{void}, q{LLVMInitialize`~target~`AsmParser}, q{}, aliases: [q{LLVMInitialise`~target~`AsmParser}]},
@@ -126,7 +126,7 @@ mixin(joinFnBinds((){
 	}}
 	static foreach(target; disassemblers){{
 		mixin(
-		`version(LLVM_Target_`~target~`){
+		`static if(nativeTarget == "`~target~`" || { version(LLVM_Target_`~target~`) return true; else return false; }()){
 			FnBind[] add = [
 				{q{void}, q{LLVMInitialize`~target~`Disassembler}, q{}, aliases: [q{LLVMInitialise`~target~`Disassembler}]},
 			];
