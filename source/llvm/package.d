@@ -34,6 +34,7 @@ public import
 	llvm.support,
 	llvm.target,
 	llvm.targetmachine,
+	llvm.transforms,
 	llvm.types;
 
 static if(!staticBinding):
@@ -62,6 +63,13 @@ mixin(makeDynloadFns("LLVM", makeLibPaths(["LLVM"], null), [
 		"llvm.remarks",
 		"llvm.support",
 		"llvm.target",
+		"llvm.transforms.instcombine",
+		"llvm.transforms.ipo",
+		"llvm.transforms.passbuilder",
+		"llvm.transforms.passmanagerbuilder",
+		"llvm.transforms.scalar",
+		"llvm.transforms.utils",
+		"llvm.transforms.vector",
 		"llvm.targetmachine",
 	]
 ));
