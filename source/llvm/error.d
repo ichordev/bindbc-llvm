@@ -18,12 +18,12 @@ alias LLVMErrorTypeId = const(void)*;
 
 mixin(joinFnBinds((){
 	FnBind[] ret = [
-		{q{LLVMErrorTypeId}, q{LLVMGetErrorTypeId}, q{LLVMErrorRef Err}},
-		{q{void}, q{LLVMConsumeError}, q{LLVMErrorRef Err}},
-		{q{char*}, q{LLVMGetErrorMessage}, q{LLVMErrorRef Err}},
-		{q{void}, q{LLVMDisposeErrorMessage}, q{char* ErrMsg}},
+		{q{LLVMErrorTypeId}, q{LLVMGetErrorTypeId}, q{LLVMErrorRef err}},
+		{q{void}, q{LLVMConsumeError}, q{LLVMErrorRef err}},
+		{q{char*}, q{LLVMGetErrorMessage}, q{LLVMErrorRef err}},
+		{q{void}, q{LLVMDisposeErrorMessage}, q{char* errMsg}},
 		{q{LLVMErrorTypeId}, q{LLVMGetStringErrorTypeId}, q{}},
-		{q{LLVMErrorRef}, q{LLVMCreateStringError}, q{const(char)* ErrMsg}},
+		{q{LLVMErrorRef}, q{LLVMCreateStringError}, q{const(char)* errMsg}},
 	];
 	return ret;
 }()));

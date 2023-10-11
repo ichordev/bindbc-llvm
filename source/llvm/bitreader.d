@@ -13,14 +13,14 @@ import llvm.types;
 
 mixin(joinFnBinds((){
 	FnBind[] ret = [
-		{q{LLVMBool}, q{LLVMParseBitcode}, q{LLVMMemoryBufferRef MemBuf, LLVMModuleRef* OutModule, char** OutMessage}},
-		{q{LLVMBool}, q{LLVMParseBitcode2}, q{LLVMMemoryBufferRef MemBuf, LLVMModuleRef* OutModule}},
-		{q{LLVMBool}, q{LLVMParseBitcodeInContext}, q{LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef* OutModule, char** OutMessage}},
-		{q{LLVMBool}, q{LLVMParseBitcodeInContext2}, q{LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef* OutModule}},
-		{q{LLVMBool}, q{LLVMGetBitcodeModuleInContext}, q{LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef* OutM, char** OutMessage}},
-		{q{LLVMBool}, q{LLVMGetBitcodeModuleInContext2}, q{LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef* OutM}},
-		{q{LLVMBool}, q{LLVMGetBitcodeModule}, q{LLVMMemoryBufferRef MemBuf, LLVMModuleRef* OutM, char** OutMessage}},
-		{q{LLVMBool}, q{LLVMGetBitcodeModule2}, q{LLVMMemoryBufferRef MemBuf, LLVMModuleRef *OutM}},
+		{q{LLVMBool}, q{LLVMParseBitcode}, q{LLVMMemoryBufferRef memBuf, LLVMModuleRef* outModule, char** outMessage}},
+		{q{LLVMBool}, q{LLVMParseBitcode2}, q{LLVMMemoryBufferRef memBuf, LLVMModuleRef* outModule}},
+		{q{LLVMBool}, q{LLVMParseBitcodeInContext}, q{LLVMContextRef contextRef, LLVMMemoryBufferRef memBuf, LLVMModuleRef* outModule, char** outMessage}},
+		{q{LLVMBool}, q{LLVMParseBitcodeInContext2}, q{LLVMContextRef contextRef, LLVMMemoryBufferRef memBuf, LLVMModuleRef* outModule}},
+		{q{LLVMBool}, q{LLVMGetBitcodeModuleInContext}, q{LLVMContextRef contextRef, LLVMMemoryBufferRef memBuf, LLVMModuleRef* outM, char** outMessage}},
+		{q{LLVMBool}, q{LLVMGetBitcodeModuleInContext2}, q{LLVMContextRef contextRef, LLVMMemoryBufferRef memBuf, LLVMModuleRef* outM}},
+		{q{LLVMBool}, q{LLVMGetBitcodeModule}, q{LLVMMemoryBufferRef memBuf, LLVMModuleRef* outM, char** outMessage}},
+		{q{LLVMBool}, q{LLVMGetBitcodeModule2}, q{LLVMMemoryBufferRef memBuf, LLVMModuleRef* outM}},
 	];
 	return ret;
 }()));

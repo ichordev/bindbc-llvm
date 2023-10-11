@@ -104,7 +104,7 @@ mixin(joinFnBinds((){
 			{q{void}, q{lto_codegen_set_assembler_path}, q{lto_code_gen_t cg, const(char)* path}},
 			{q{void}, q{lto_codegen_add_must_preserve_symbol}, q{lto_code_gen_t cg, const(char)* symbol}},
 			{q{const(void)*}, q{lto_codegen_compile}, q{lto_code_gen_t cg, size_t* length}},
-			{q{void}, q{lto_codegen_debug_options}, q{lto_code_gen_t cg, const(char)* }},
+			{q{void}, q{lto_codegen_debug_options}, q{lto_code_gen_t cg, const(char)*}},
 		];
 		ret ~= add;
 	}
@@ -182,7 +182,7 @@ mixin(joinFnBinds((){
 		FnBind[] add = [
 			{q{thinlto_code_gen_t}, q{thinlto_create_codegen}, q{}},
 			{q{void}, q{thinlto_codegen_dispose}, q{thinlto_code_gen_t cg}},
-			{q{void}, q{thinlto_codegen_add_module}, q{thinlto_code_gen_t cg, const(char)* identifier, const(char)* data, int length}},
+			{q{void}, q{thinlto_codegen_add_module}, q{thinlto_code_gen_t cg, const(char)* identifier, const(byte)* data, int length}},
 			{q{void}, q{thinlto_codegen_process}, q{thinlto_code_gen_t cg}},
 			{q{uint}, q{thinlto_module_get_num_objects}, q{thinlto_code_gen_t cg}},
 			{q{LTOObjectBuffer}, q{thinlto_module_get_object}, q{thinlto_code_gen_t cg, uint index}},

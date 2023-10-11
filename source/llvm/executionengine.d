@@ -62,7 +62,7 @@ mixin(joinFnBinds((){
 		{q{LLVMGenericValueRef}, q{LLVMRunFunction}, q{LLVMExecutionEngineRef ee, LLVMValueRef f, uint numArgs, LLVMGenericValueRef* args}},
 		{q{void}, q{LLVMFreeMachineCodeForFunction}, q{LLVMExecutionEngineRef ee, LLVMValueRef f}},
 		{q{void}, q{LLVMAddModule}, q{LLVMExecutionEngineRef ee, LLVMModuleRef m}},
-		{q{LLVMBool}, q{LLVMRemoveModule}, q{LLVMExecutionEngineRef ee, LLVMModuleRef m, LLVMModuleRef* outMod, char* *outError}},
+		{q{LLVMBool}, q{LLVMRemoveModule}, q{LLVMExecutionEngineRef ee, LLVMModuleRef m, LLVMModuleRef* outMod, char** outError}},
 		{q{LLVMBool}, q{LLVMFindFunction}, q{LLVMExecutionEngineRef ee, const(char)* name, LLVMValueRef* outFn}},
 		{q{void*}, q{LLVMRecompileAndRelinkFunction}, q{LLVMExecutionEngineRef ee, LLVMValueRef fn}},
 		{q{LLVMTargetDataRef}, q{LLVMGetExecutionEngineTargetData}, q{LLVMExecutionEngineRef ee}},
